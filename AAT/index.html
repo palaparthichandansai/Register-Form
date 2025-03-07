@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Registration Form</title>
+    <link rel="stylesheet" href="registartionform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #66ea83, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    margin: 0;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+    background-image: url(https://img.reintech.io/variants/q5bd77yrqxz88jep88qm6re0x2e2/e7b4ce09c703210ab8f75b017c7eaf0951c5a95b737ee8120602845c1c1d944b);
+    background-size: cover;
+}
+
+
+.container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    transform: scale(0.9);
+    transition: transform 0.5s ease-in-out;
+    margin: 0 auto;
+}
+
+.container:hover {
+    transform: scale(1);
+}
+
+h2 {
+    color: white;
+    margin-bottom: 20px;
+    animation: slideDown 1s ease-in-out;
+    letter-spacing: 2px;
+}
+
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+    text-align: left;
+    animation: fadeIn 1.2s ease-in-out;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: calc(100% - 30px);
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.4);
+    color: white;
+    transition: 0.3s;
+    outline: none;
+    animation: fadeIn 1.4s ease-in-out;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+
+
+.error {
+    font-size: 12px;
+    color: #ff4d4d;
+    display: none;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+
+.strength-meter {
+    height: 6px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    margin-top: 5px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.strength-meter div {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    opacity: 0.5;
+    animation: fadeIn 1.6s ease-in-out;
+    letter-spacing: 1.5px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+
+.social-text {
+    margin: 20px 0;
+    color: white;
+    font-size: 14px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.social-icon:hover {
+    background: white;
+    color: #667eea;
+}
+
+button:hover:not(:disabled) {
+    background: white;
+    color: #667eea;
+    transform: scale(1.05);
+}
+</style>
+<body> 
+    <div class="container">
+        <form id="registrationForm">        
+            <h2>Registration Form</h2>
+
+            <div class="input-group">
+                <label for="name" >Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+                <span class="error" id="nameError" >Name must be at least 3 characters </span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <span class="error" id="emailError">Enter a valid email</span>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password">
+                <div class="strength-meter"><div id="passwordStrength"></div></div>
+                <span class="error" id="passwordError">8+ chars, 1 uppercase, 1 number, 1 special char</span>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                <span class="error" id="confirmPasswordError">Passwords do not match</span>
+            </div>      
+
+            <button type="submit" id="submitBtn" disabled>Submit</button>
+            <p class="social-text">Or sign up with</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+        </form>
+    </div>
+    <script>
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const submitBtn = document.getElementById("submitBtn");
+const strengthMeter = document.querySelector(".strength-meter div");
+const form = document.getElementById("registrationForm");
+
+function saveToLocalStorage() {
+    localStorage.setItem("name", nameInput.value);
+    localStorage.setItem("email", emailInput.value);
+}
+
+function loadFromLocalStorage() {
+    if (localStorage.getItem("name")) nameInput.value = localStorage.getItem("name");
+    if (localStorage.getItem("email")) emailInput.value = localStorage.getItem("email");
+}
+
+function validateName() {
+    const name = nameInput.value.trim();
+    document.getElementById("nameError").style.display = name.length >= 3 ? "none" : "block";
+    return name.length >= 3;
+}
+
+function validateEmail() {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const valid = emailPattern.test(emailInput.value);
+    document.getElementById("emailError").style.display = valid ? "none" : "block";
+    return valid;
+}
+
+function validatePassword() {
+    const password = passwordInput.value;
+    let strength = 0;
+
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+    const colors = ["red", "orange", "yellow", "green"];
+    strengthMeter.style.width = `${(strength / 4) * 100}%`;
+    strengthMeter.style.background = colors[strength - 1] || "transparent";
+
+    const valid = strength === 4;
+    document.getElementById("passwordError").style.display = valid ? "none" : "block";
+    return valid;
+}
+
+function validateConfirmPassword() {
+    const valid = passwordInput.value === confirmPasswordInput.value;
+    document.getElementById("confirmPasswordError").style.display = valid ? "none" : "block";
+    return valid;
+}
+
+function validateForm() {
+    saveToLocalStorage();
+    submitBtn.disabled = !(validateName() && validateEmail() && validatePassword() && validateConfirmPassword());
+}
+
+[nameInput, emailInput, passwordInput, confirmPasswordInput].forEach(input => {
+    input.addEventListener("input", validateForm);
+});
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    if (validateName() && validateEmail() && validatePassword() && validateConfirmPassword()) {
+        alert("Registration Successful!");
+        form.reset();
+        localStorage.clear();
+        validateForm();
+    }
+});
+
+window.addEventListener("load", loadFromLocalStorage);
+    </script>
+   
+</body>
+</html>
